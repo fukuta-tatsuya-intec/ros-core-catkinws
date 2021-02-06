@@ -11,7 +11,8 @@ RUN apt-get update && \
                                     git \
                                     build-essential \
                                     iputils-ping \
-                                    net-tools
+                                    net-tools \
+                                    software-properties-common
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' && \
     apt-get update && apt-get install -y cmake
 
