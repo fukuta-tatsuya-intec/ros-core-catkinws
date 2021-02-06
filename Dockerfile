@@ -11,23 +11,8 @@ RUN apt-get update && \
                                     git \
                                     build-essential \
                                     iputils-ping \
-                                    net-tools \
-                                    apt-transport-https ca-certificates gnupg software-properties-common wget
+                                    net-tools
 
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
-    sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' && \
-    apt-get update && apt-get install -y cmake
-
-RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
-                mkdir -p /catkin_ws/src && \
-                cd /catkin_ws/src && \
-                catkin_init_workspace && \
-                cd /catkin_ws/ && \
-                catkin_make && \
-                source /catkin_ws/devel/setup.bash && \
-                chmod +x /ros_entrypoint.sh && \
-                apt autoclean -y && \
-                apt autoremove -y && \
-                rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*"
+RUN /bin/bash ./build.sh
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
