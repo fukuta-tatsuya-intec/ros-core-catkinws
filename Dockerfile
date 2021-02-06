@@ -18,7 +18,7 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
                 cd /catkin_ws/src && \
                 catkin_init_workspace && \
                 cd /catkin_ws/ && \
-                catkin_make -D_FILE_OFFSET_BITS=64 && \
+                catkin_make CFLAGS=-D_FILE_OFFSET_BITS=64 CXXFLAGS=-D_FILE_OFFSET_BITS=64 && \
                 source /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
                 apt autoclean -y && \
