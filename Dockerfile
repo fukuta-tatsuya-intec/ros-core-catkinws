@@ -12,13 +12,15 @@ RUN apt-get update && \
                                     build-essential \
                                     iputils-ping \
                                     net-tools
+RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' && \
+    apt-get update && apt-get install -y cmake
 
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
                 mkdir -p /catkin_ws/src && \
                 cd /catkin_ws/src && \
                 catkin_init_workspace && \
                 cd /catkin_ws/ && \
-                catkin_make CFLAGS=-D_FILE_OFFSET_BITS=64 CXXFLAGS=-D_FILE_OFFSET_BITS=64 && \
+                catkin_make && \
                 source /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
                 apt autoclean -y && \
