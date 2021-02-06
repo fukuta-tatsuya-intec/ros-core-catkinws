@@ -18,6 +18,9 @@ RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
                 cd /catkin_ws/src && \
                 catkin_init_workspace"
 
+ENV CFLAGS="-D_FILE_OFFSET_BITS=64"
+ENV CXXFLAGS="-D_FILE_OFFSET_BITS=64"
+
 RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
                 export && \
                 cd /catkin_ws && \
