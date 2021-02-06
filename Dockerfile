@@ -16,4 +16,16 @@ RUN apt-get update && \
 
 RUN /build.sh
 
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
+                mkdir -p /catkin_ws/src && \
+                cd /catkin_ws/src && \
+                catkin_init_workspace && \
+                cd /catkin_ws/ && \
+                catkin_make && \
+                source /catkin_ws/devel/setup.bash && \
+                chmod +x /ros_entrypoint.sh && \
+                apt autoclean -y && \
+                apt autoremove -y && \
+                rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*"
+
 ENTRYPOINT ["/ros_entrypoint.sh"]
