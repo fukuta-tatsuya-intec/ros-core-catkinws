@@ -5,6 +5,7 @@ LABEL maintainer="INTEC Inc<info-rdbox@intec.co.jp>"
 ENV ROS_DISTRO=noetic
 
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
+COPY ./build.sh /build.sh
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -13,6 +14,6 @@ RUN apt-get update && \
                                     iputils-ping \
                                     net-tools
 
-RUN /bin/bash ./build.sh
+RUN /build.sh
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
