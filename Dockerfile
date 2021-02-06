@@ -16,8 +16,9 @@ RUN apt-get update && \
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
                 mkdir -p /catkin_ws/src && \
                 cd /catkin_ws/src && \
-                catkin_init_workspace && \
-                cd /catkin_ws/ && \
+                catkin_init_workspace
+
+RUN /bin/bash -c "cd /catkin_ws/ && \
                 catkin_make && \
                 source /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
