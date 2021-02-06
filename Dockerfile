@@ -13,15 +13,15 @@ RUN apt-get update && \
                                     iputils-ping \
                                     net-tools
 
-RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
+RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
                 mkdir -p /catkin_ws/src && \
                 cd /catkin_ws/src && \
                 catkin_init_workspace"
 
-RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
+RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
                 cd /catkin_ws/ && \
                 catkin_make && \
-                source /catkin_ws/devel/setup.bash && \
+                . /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
                 apt autoclean -y && \
                 apt autoremove -y && \
