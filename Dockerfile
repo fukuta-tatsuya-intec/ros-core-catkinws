@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-core-focal
+FROM ros:noetic-ros-base-focal
 
 LABEL maintainer="INTEC Inc<info-rdbox@intec.co.jp>"
 
