@@ -12,8 +12,9 @@ RUN apt-get update && \
                                     build-essential \
                                     iputils-ping \
                                     net-tools \
-                                    software-properties-common
-RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' && \
+                                    apt-transport-https ca-certificates gnupg software-properties-common wget
+
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
     apt-get update && apt-get install -y cmake
 
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
