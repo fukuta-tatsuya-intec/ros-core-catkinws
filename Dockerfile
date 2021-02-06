@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-base-focal
+FROM ros:noetic-ros-core-focal
 
 LABEL maintainer="INTEC Inc<info-rdbox@intec.co.jp>"
 
@@ -7,25 +7,19 @@ ENV ROS_DISTRO=noetic
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
 
 RUN apt-get update && \
-    apt-get install -y  \
+    apt-get install -y --no-install-recommends \
                                     git \
                                     build-essential \
                                     iputils-ping \
                                     net-tools
 
-RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
                 mkdir -p /catkin_ws/src && \
                 cd /catkin_ws/src && \
-                catkin_init_workspace"
-
-ENV CFLAGS="-D_FILE_OFFSET_BITS=64"
-ENV CXXFLAGS="-D_FILE_OFFSET_BITS=64"
-
-RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
-                export && \
-                cd /catkin_ws && \
-                catkin_make && \
-                . /catkin_ws/devel/setup.bash && \
+                catkin_init_workspace && \
+                cd /catkin_ws/ && \
+                catkin_make -D_FILE_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64 && \
+                source /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
                 apt autoclean -y && \
                 apt autoremove -y && \
