@@ -19,7 +19,8 @@ RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
                 catkin_init_workspace"
 
 RUN /bin/bash -c ". /opt/ros/noetic/setup.bash && \
-                cd /catkin_ws/ && \
+                export && \
+                cd /catkin_ws && \
                 catkin_make && \
                 . /catkin_ws/devel/setup.bash && \
                 chmod +x /ros_entrypoint.sh && \
