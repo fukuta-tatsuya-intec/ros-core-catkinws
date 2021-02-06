@@ -7,7 +7,7 @@ ENV ROS_DISTRO=noetic
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y  \
                                     git \
                                     build-essential \
                                     iputils-ping \
