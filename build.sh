@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -xeu
 
 architecture=$(dpkg --print-architecture)
 
